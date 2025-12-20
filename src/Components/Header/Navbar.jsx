@@ -15,6 +15,7 @@ const Navbar = () => {
             <Link href={"/about"}>About</Link>
             <Link href={"/blog/author"}>Blog</Link>
             <Link href={`/user/${12}`}>User</Link>
+            <Link href={`/tutorial`}>Tutorial</Link>
             <Link href={`/register`}>Register</Link>
             <Link href={`/login`}>Login</Link>
           </nav>
