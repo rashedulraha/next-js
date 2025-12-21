@@ -1,6 +1,5 @@
 import { FoodCard } from "@/Components/Card/FoodCard";
 import Container from "@/Components/Container";
-import React from "react";
 
 const getFoods = async () => {
   const response = await fetch(
