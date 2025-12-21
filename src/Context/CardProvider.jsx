@@ -1,9 +1,8 @@
 "use client";
 import { createContext, useState } from "react";
+import React from "react";
 
 export const CardContext = createContext();
-
-import React from "react";
 
 const CardProvider = ({ children }) => {
   const [card, setCard] = useState([]);

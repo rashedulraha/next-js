@@ -1,21 +1,30 @@
 import { FoodCard } from "@/Components/Card/FoodCard";
 import Container from "@/Components/Container";
+import CartItem from "./[id]/CartItem";
+import InputSearch from "@/Components/InputSearch/InputSearch";
 
-const getFoods = async () => {
+const getFoods = async (search) => {
   const response = await fetch(
-    "https://taxi-kitchen-api.vercel.app/api/v1/foods/random"
+    `https://taxi-kitchen-api.vercel.app/api/v1/foods/random?search=${search}`
   );
   const data = await response.json();
 
   return data.foods;
 };
 
-const Foods = async () => {
-  const foods = await getFoods();
+const Foods = async ({ searchParams }) => {
+  const { search = "" } = await searchParams;
+
+  const foods = await getFoods(search);
   return (
     <div>
       <Container>
         <h1>Foods {foods.length} found</h1>
+
+        {/* input search bar */}
+        <div>
+          <InputSearch />
+        </div>
 
         <div className="grid grid-cols-12 gap-5">
           <div className="col-span-9">
@@ -32,7 +41,9 @@ const Foods = async () => {
             </h3>
             <hr className="mt-2 text-gray-600" />
 
-            <div className="mt-5"></div>
+            <div className="mt-10">
+              <CartItem />
+            </div>
           </div>
         </div>
       </Container>
