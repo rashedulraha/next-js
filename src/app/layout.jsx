@@ -15,8 +15,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Dev story",
-  description: "an app for showing developer story around the world",
+  title: {
+    default: "dev store",
+    template: "%s | dev store",
+  },
 };
 
 export default function RootLayout({ children }) {

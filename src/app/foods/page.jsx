@@ -5,11 +5,17 @@ import InputSearch from "@/Components/InputSearch/InputSearch";
 
 const getFoods = async (search) => {
   const response = await fetch(
-    `https://taxi-kitchen-api.vercel.app/api/v1/foods/random?search=${search}`
+    `https://taxi-kitchen-api.vercel.app/api/v1/foods/random?search=${search}`,
+    { next: { revalidate: 10 } } // 10second auto render
   );
   const data = await response.json();
 
   return data.foods;
+};
+
+export const metadata = {
+  title: "Foods | Dev story",
+  description: "an app for showing developer story around the world",
 };
 
 const Foods = async ({ searchParams }) => {
