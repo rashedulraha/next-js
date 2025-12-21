@@ -1,60 +1,37 @@
 "use client";
 
-import React, { useState } from "react";
 import Image from "next/image";
-import { ShoppingCart, Eye } from "lucide-react";
+import Link from "next/link";
 
-export function FoodCard({ data, loading = false }) {
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
-
-  if (loading) {
-    return (
-      <div className="overflow-hidden rounded-xl border bg-white shadow-sm">
-        <div className="w-full h-64 bg-gray-200 animate-pulse" />
-        <div className="p-4 space-y-3">
-          <div className="h-6 w-3/4 bg-gray-200 animate-pulse rounded" />
-          <div className="h-4 w-1/2 bg-gray-200 animate-pulse rounded" />
-          <div className="h-8 w-1/3 bg-gray-200 animate-pulse rounded" />
-        </div>
-        <div className="p-4 pt-0 flex gap-2">
-          <div className="h-10 flex-1 bg-gray-200 animate-pulse rounded-lg" />
-          <div className="h-10 flex-1 bg-gray-200 animate-pulse rounded-lg" />
-        </div>
-      </div>
-    );
-  }
+export function FoodCard({ data }) {
+  const { title, foodImg, price, category, id } = data || {};
 
   return (
-    <div className="overflow-hidden rounded-xl border bg-white shadow-sm transition-shadow hover:shadow-lg">
-      <div className="relative w-full h-64 bg-gray-100">
-        {!isImageLoaded && (
-          <div className="absolute inset-0 bg-gray-200 animate-pulse" />
-        )}
-        <Image
-          src={data.foodImg}
-          alt={data.title}
-          fill
-          className="object-cover transition-opacity duration-300"
-          onLoadingComplete={() => setIsImageLoaded(true)}
-          priority
-        />
+    <div className="max-w-sm bg-white border border-gray-200 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      {/* Image Container */}
+      <div className="relative h-48 w-full">
+        <Image src={foodImg} alt={title} fill className="object-cover" />
+        <span className="absolute top-2 right-2 bg-yellow-400 text-xs font-bold px-2 py-1 rounded">
+          {category}
+        </span>
       </div>
 
+      {/* Content */}
       <div className="p-4">
-        <h3 className="text-xl font-semibold mb-1 text-black">{data.title}</h3>
-        <p className="text-sm text-gray-600 mb-2">{data.category}</p>
-        <p className="text-2xl font-bold text-blue-600">${data.price}</p>
-      </div>
+        <h3 className="text-xl font-bold text-gray-800 truncate">{title}</h3>
+        <p className="text-2xl font-semibold text-orange-600 my-2">${price}</p>
 
-      <div className="p-4 pt-0 flex gap-3">
-        <button className="flex-1 flex items-center justify-center gap-2 bg-blue-600 text-white font-medium py-3 rounded-lg hover:bg-blue-700 transition">
-          <ShoppingCart size={18} />
-          Add to Cart
-        </button>
-        <button className="flex-1 flex items-center justify-center gap-2 border border-gray-300 font-medium py-3 rounded-lg hover:bg-gray-50 transition text-black">
-          <Eye size={18} />
-          View More
-        </button>
+        {/* Buttons */}
+        <div className="flex gap-2 mt-4">
+          <button className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm">
+            Add to Cart
+          </button>
+          <Link
+            href={`/foods/${id}`}
+            className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-lg transition-colors text-sm border border-gray-300 text-center">
+            View More
+          </Link>
+        </div>
       </div>
     </div>
   );
