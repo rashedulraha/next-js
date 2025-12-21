@@ -1,9 +1,10 @@
+import FoodCardSkeleton from "@/Components/Skeleton/FoodCardSkeleton";
 import React from "react";
 
 const loading = () => {
   return (
     <div>
-      <h1>Hello</h1>
+      <FoodCardSkeleton />
     </div>
   );
 };
