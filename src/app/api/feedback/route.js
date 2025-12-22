@@ -7,13 +7,18 @@ export async function GET(request) {
 export async function POST(request) {
   const { message } = await request.json();
 
-  if ((!message == typeof message) !== "string") {
+  if (!message || typeof message !== "string") {
     return Response.json({
       status: 400,
       message: "please send a message",
     });
   }
+
+  const newFeedback = { message, id: feedBack.length + 1 };
+  feedBack.push(newFeedback);
+
   return Response.json({
-    status: 2000,
+    acKnowledge: true,
+    insertedId: newFeedback.id,
   });
 }
