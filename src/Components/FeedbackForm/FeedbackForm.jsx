@@ -1,8 +1,10 @@
 "use client";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const FeedbackForm = () => {
   const [loading, setLoading] = useState(false);
+  const route = useRouter();
 
   // send feedback to database
   const handleSubmit = async (e) => {
@@ -24,6 +26,7 @@ const FeedbackForm = () => {
 
     if (result?.result?.insertedId) {
       e.target.reset();
+      route.push("/feedbacks");
       alert("Your feedback submitted. Thank you!");
     }
   };
