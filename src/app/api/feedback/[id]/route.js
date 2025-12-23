@@ -1,8 +1,20 @@
-import { feedBack } from "../../route";
+import { connect } from "@/app/lib/dbConnect";
+import { ObjectId } from "mongodb";
+
+const feedbackCollection = connect("feedbacks");
 
 export async function GET(request, { params }) {
   const { id } = await params;
 
-  const singleFeedback = feedBack.find((fb) => fb.id == id) || {};
-  return Response.json({ singleFeedback });
+  if (id.length != 24) {
+    return Response.json({
+      status: 400,
+      message: "valid id required",
+    });
+  }
+
+  const query = { _id: new ObjectId(id) };
+  const result = await feedbackCollection.find(query).toArray();
+
+  return Response.json(result);
 }
