@@ -21,6 +21,11 @@ const Navbar = () => {
             <Link className="hover:underline transition-all" href={"/reviews"}>
               Reviews
             </Link>
+            <Link
+              className="hover:underline transition-all"
+              href={"/feedbacks"}>
+              Feedbacks
+            </Link>
           </div>
         </nav>
       </Container>

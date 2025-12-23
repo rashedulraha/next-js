@@ -35,11 +35,12 @@ export async function DELETE(request, { params }) {
   return Response.json(result);
 }
 
-//  Update data
+//!  Update data
 export async function PATCH(request, { params }) {
   const { id } = await params;
 
-  const { message } = await request;
+  const { message } = await request.json();
+  console.log(message);
 
   if (id.length != 24) {
     return Response.json({
