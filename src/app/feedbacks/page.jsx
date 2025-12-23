@@ -1,4 +1,5 @@
 import FeedbackCard from "@/Components/Card/Feedback";
+import Link from "next/link";
 import React from "react";
 
 export const metadata = {
@@ -12,11 +13,20 @@ const getFeedback = async () => {
 
 const FeedbacksPage = async () => {
   const feedbacks = await getFeedback();
-  console.log(feedbacks);
 
   return (
     <div className="container px-4 mx-auto">
-      <h1 className="text-2xl fond-bold">feedback {feedbacks.length} Found</h1>
+      <div className="flex items-center justify-between ">
+        <div>
+          <h1 className="text-2xl fond-bold">
+            feedback {feedbacks.length} Found
+          </h1>
+        </div>
+        <div>
+          <Link href={"/feedbacks/addfeedback"}>Add Feedback</Link>
+        </div>
+      </div>
+
       <div className="my-5  grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8">
         {feedbacks.map((feedback) => (
           <FeedbackCard key={feedback._id} feedback={feedback} />
