@@ -7,7 +7,10 @@ export const metadata = {
 };
 
 const getFeedback = async () => {
-  const result = await fetch("http://localhost:3000/api/feedback");
+  const result = await fetch("http://localhost:3000/api/feedback", {
+    cache: "force-cache",
+    next: { revalidate: 60 },
+  });
   return result.json();
 };
 
@@ -16,14 +19,18 @@ const FeedbacksPage = async () => {
 
   return (
     <div className="container px-4 mx-auto">
-      <div className="flex items-center justify-between ">
+      <div className="flex items-center justify-between , mt-10 ">
         <div>
           <h1 className="text-2xl fond-bold">
             feedback {feedbacks.length} Found
           </h1>
         </div>
         <div>
-          <Link href={"/feedbacks/addfeedback"}>Add Feedback</Link>
+          <Link
+            href={"/feedbacks/addfeedback"}
+            className="px-4 py-2 bg-white text-black rounded">
+            Add Feedback
+          </Link>
         </div>
       </div>
 

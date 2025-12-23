@@ -1,12 +1,15 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 
 const FeedbackForm = () => {
-  //  send feedback to data base
+  const [loading, setLoading] = useState(false);
+
+  // send feedback to database
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    const message = await e.target.feedback.value;
+    const message = e.target.feedback.value;
 
     const res = await fetch("http://localhost:3000/api/feedback/", {
       method: "POST",
@@ -17,27 +20,43 @@ const FeedbackForm = () => {
     });
 
     const result = await res.json();
-    console.log(result);
+    setLoading(false);
 
-    if (result.result.insertedId) {
-      alert("Your feedback done  .thank you!");
+    if (result?.result?.insertedId) {
+      e.target.reset();
+      alert("Your feedback submitted. Thank you!");
     }
   };
 
   return (
-    <div className="container mx-auto px-4 mt-10">
-      <div className="space-y-3">
-        <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
-          <textarea
-            name="feedback"
-            role="5"
-            className="border border-dashed w-full p-4 rounded text-lg"
-            placeholder="Enter your feedback"></textarea>
-          <hr />
-          <button className="px-4 py-2 bg-white text-black rounded mt-5">
-            Add FeedBack
-          </button>
-        </form>
+    <div className="container mx-auto px-4 mt-16">
+      <div className="max-w-xl mx-auto">
+        {/* Card */}
+        <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm p-6">
+          <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-2">
+            Share Your Feedback
+          </h2>
+          <p className="text-sm text-gray-500 mb-5">
+            We value your thoughts and suggestions.
+          </p>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <textarea
+              name="feedback"
+              rows={5}
+              required
+              className="w-full resize-none rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent p-4 text-gray-800 dark:text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+              placeholder="Write your feedback here..."
+            />
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full rounded-xl bg-blue-600 py-3 text-white font-medium hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed transition">
+              {loading ? "Submitting..." : "Add Feedback"}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
