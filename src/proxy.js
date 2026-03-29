@@ -14,6 +14,7 @@ export async function proxy(request) {
 
   return NextResponse.next();
 }
+// Hello
 
 // Alternatively, you can use a default export:
 // export default function proxy(request) { ... }
