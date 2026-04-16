@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Poppins } from "next/font/google";
 import { Lock, Mail } from "lucide-react";
+import { LoginButton } from "@/components/auth/login-button";
 
 const font = Poppins({
   subsets: ["latin"],
@@ -62,13 +63,15 @@ export default function Home() {
             </a>
           </div>
 
-          <Button className="w-full py-3 bg-gradient-to-r from-sky-600 to-sky-700 text-white font-medium rounded-lg shadow-md hover:from-sky-700 hover:to-sky-800 transition-all duration-300 transform hover:-translate-y-0.5">
-            Sign In
-          </Button>
+          <LoginButton>
+            <Button className="w-full py-3 bg-gradient-to-r from-sky-600 to-sky-700 text-white font-medium rounded-lg shadow-md hover:from-sky-700 hover:to-sky-800 transition-all duration-300 transform hover:-translate-y-0.5">
+              Sign In
+            </Button>
+          </LoginButton>
 
           <div className="text-center">
             <p className="text-sm text-sky-600">
-              Don&apos;t have an account?{" "}
+              Don&apos;t have an account?
               <a
                 href="#"
                 className="font-medium text-sky-800 hover:text-sky-900">
