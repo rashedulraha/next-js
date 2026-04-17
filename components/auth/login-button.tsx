@@ -9,11 +9,7 @@ interface LoginButton {
   asChild?: boolean;
 }
 
-export const LoginButton = ({
-  children,
-  mode = "redirect",
-  asChild,
-}: LoginButton) => {
+export const LoginButton = ({ children, mode = "redirect" }: LoginButton) => {
   //? implement router function
   const router = useRouter();
   //? handle login button click
